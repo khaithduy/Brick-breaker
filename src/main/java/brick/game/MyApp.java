@@ -10,7 +10,7 @@ public class MyApp {
         GamePlay gameplay = new GamePlay();
         
         obj.setBounds(10, 10, 700, 600);
-        obj.setTitle("BrickBreaker - By Khai");
+        obj.setTitle("Brick Breaker Game");
         obj.setResizable(false);
         obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         obj.add(gameplay);

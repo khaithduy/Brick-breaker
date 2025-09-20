@@ -23,12 +23,34 @@ public class MapGenerator {
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
                 if (map[i][j] > 0) {
-                    g.setColor(Color.red);
-                    g.fillRect(j * bricksWidth + 80, i * bricksHeight + 50, bricksWidth, bricksHeight);
-
-                    g.setStroke(new BasicStroke(3));
-                    g.setColor(Color.black);
-                    g.drawRect(j * bricksWidth + 80, i * bricksHeight + 50, bricksWidth, bricksHeight);
+                    // Different colors for each row
+                    Color brickColor;
+                    switch (i) {
+                        case 0: brickColor = new Color(255, 100, 100); break; // Red
+                        case 1: brickColor = new Color(100, 255, 100); break; // Green  
+                        case 2: brickColor = new Color(100, 100, 255); break; // Blue
+                        default: brickColor = new Color(255, 255, 100); break; // Yellow
+                    }
+                    
+                    int x = j * bricksWidth + 80;
+                    int y = i * bricksHeight + 50;
+                    
+                    // Draw brick with gradient effect
+                    java.awt.GradientPaint brickGradient = new java.awt.GradientPaint(
+                        x, y, brickColor,
+                        x, y + bricksHeight, brickColor.darker()
+                    );
+                    g.setPaint(brickGradient);
+                    g.fillRoundRect(x, y, bricksWidth, bricksHeight, 8, 8);
+                    
+                    // Highlight on top
+                    g.setColor(new Color(255, 255, 255, 100));
+                    g.fillRoundRect(x + 2, y + 2, bricksWidth - 4, 4, 4, 4);
+                    
+                    // Border
+                    g.setStroke(new BasicStroke(2));
+                    g.setColor(brickColor.darker().darker());
+                    g.drawRoundRect(x, y, bricksWidth, bricksHeight, 8, 8);
 
                 }
             }
